@@ -7,7 +7,7 @@ LIBS = -lncurses
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 
-MAIN = ttext
+MAIN = simpletext
 
 .PHONY: depend clean
 
