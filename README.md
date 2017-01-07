@@ -2,7 +2,7 @@
 
 A simple text editor designed to show the working of the C programming language
 
-![Pretty!](http://i.imgur.com/yEjJY1h.png)
+![Pretty!](http://i.imgur.com/QYbDG2N.png)
 
 Designed to emulate Vim, the text editor uses a linked-list based design to operate.
 
