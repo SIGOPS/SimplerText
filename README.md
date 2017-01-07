@@ -39,3 +39,7 @@ Highly extensible. Press `i` to start editing!
 - `qa` to close all buffers and quit
 - `edit filename` to open a file in the same buffer
 - `open filename` to open a file in a new buffer
+
+
+## Contributing
+Since this repository is meant to act as a tutorial taught by SIGOPS, ACM@UIUC, it will only be updated for maintenance purposes. However, Feel free to fork and make pull requests. We will be more than happy to make a list of contributors for various features added (sort of like a hall of fame!)
