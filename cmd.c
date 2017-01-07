@@ -215,6 +215,14 @@ int add_char(editor_t* e, int key) {
 	return 1;
 }
 
+int add_tab(editor_t* e, int key) {
+	int i;
+	for(i = 0; i < 4; i++) {
+		add_char(e, ' ');
+	}
+	return 1;
+}
+
 int new_buffer(editor_t* e, int key) {
 	buffer_t* buf = buffer_create(NULL);
 	buf->next = e->buf;

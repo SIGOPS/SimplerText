@@ -26,6 +26,7 @@ int new_line(editor_t* e, int key);
 int back_char(editor_t* e, int key);
 int del_char(editor_t* e, int key);
 int add_char(editor_t* e, int key);
+int add_tab(editor_t* e, int key);
 int new_buffer(editor_t* e, int key);
 int del_buffer(editor_t* e, int key);
 int next_buffer(editor_t* e, int key);

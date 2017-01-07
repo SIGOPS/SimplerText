@@ -75,6 +75,12 @@ static cmd_t insert_mode_cmds[] = {
     // ESC
     {27, NULL, NORMAL},
 
+    // Tab needs a special key
+    {9, add_tab, INSERT},
+    {KEY_BTAB, add_tab, INSERT},
+    {KEY_CTAB, add_tab, INSERT},
+    {KEY_CATAB, add_tab, INSERT},
+
     // Anything else
     {'\0', add_char, INSERT}
 };
