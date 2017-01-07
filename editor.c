@@ -7,12 +7,12 @@ static cmd_t normal_mode_cmds[] = {
     {CTRL('o'), read_file, NORMAL},
 
     // Opening and closing buffers
-    {CTRL('t'), new_buffer, NORMAL},
+    {CTRL('n'), new_buffer, NORMAL},
     {CTRL('w'), del_buffer, NORMAL},
 
     // Buffer Switching
-    {CTRL('n'), next_buffer, NORMAL},
-    {CTRL('p'), prev_buffer, NORMAL},
+    {CTRL('t'), next_buffer, NORMAL},
+    {CTRL('T'), prev_buffer, NORMAL},
 
     // Change Mode
     {'i', NULL, INSERT},
@@ -20,7 +20,6 @@ static cmd_t normal_mode_cmds[] = {
     // File Movement
     {'g', beg_of_buffer, NORMAL},
     {'G', end_of_buffer, NORMAL},
-    {'a', next_char, INSERT},
 
     // Movement
     {KEY_LEFT, prev_char, NORMAL},
@@ -89,7 +88,7 @@ static const mode_tt insert_mode = {
     .exit_k = CTRL('q'),
     .cmd = insert_mode_cmds,
     .count = COUNT(insert_mode_cmds),
-    .name = "- INSERT -"
+    .name = "INSERT"
 };
 
 void set_mode(editor_t* e, enum MODE m) {
@@ -219,6 +218,7 @@ void editor_display(editor_t* e) {
         w_line = w_line->next;
     }
 
+    // Go line by line
     for(win_row = 0; win_row <e->text_win.rows; win_row++) {
         wmove(e->text_win.win, win_row, 0);
         size_t col;

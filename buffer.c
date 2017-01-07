@@ -20,7 +20,6 @@ void buffer_free(buffer_t* buf) {
 	// Then just free the other parts of it
 	buf->next = buf->prev = NULL;
 	free(buf->name);
-	buf->name[0] = '\0';
 	free(buf);
 }
 
