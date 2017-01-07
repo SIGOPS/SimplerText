@@ -11,6 +11,7 @@
 
 void set_mode(editor_t* e, enum MODE m);
 
+int q_flag;
 
 void editor_init(editor_t* e, int ac, const char* av[]);
 void editor_edit(editor_t* e);

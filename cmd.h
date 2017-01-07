@@ -11,6 +11,8 @@
 #include "line.h"
 #include "editor.h"
 
+extern int q_flag;
+
 int command(editor_t* e, int key);
 int read_file(editor_t* e, int key);
 int write_file(editor_t* e, int key);

@@ -143,6 +143,7 @@ void editor_init(editor_t* e, int ac, const char* av[]) {
     e->beg = e->buf;
 
     set_mode(e, NORMAL);
+    q_flag = 0;
 }
 
 void editor_term(editor_t* e) {
@@ -246,6 +247,10 @@ void editor_display(editor_t* e) {
 
 void editor_edit(editor_t* e) {
     while(true) {
+        // Check if we have to quit
+        if (q_flag) {
+            return;
+        }
         // Just in case there wasn't a buffer created, do so now
         if (!e->buf) {
             e->buf = buffer_create(NULL);

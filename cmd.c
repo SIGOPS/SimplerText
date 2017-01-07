@@ -1,5 +1,7 @@
 #include "cmd.h"
 
+
+
 // Couple of private functions
 static void get_input(editor_t* e, char* input, const char* cmd) {
 	// This function puts a string in a ncurses window, add moves the
@@ -28,13 +30,41 @@ static int run_cmd(editor_t* e, const char* cmd, const char* arg) {
 	if(strcmp(cmd, "w") == 0) {
 		return buffer_write(e->buf, arg);
 	}
-	// Edit or open a new file
+
+	// Quit (close) the current buffer
+	if(strcmp(cmd, "q") == 0) {
+		// If this is the only buffer, then quit the app
+		if (e->buf->next == NULL && e->buf->prev == NULL) {
+			q_flag = 1;
+			return 1;
+		}
+		return del_buffer(e, 0);
+	}
+
+	// Close all buffers
+	if(strcmp(cmd, "qa") == 0) {
+		// Just set the flag, the term function will take care of 
+		// this for us
+		q_flag = 1;
+	}
+
+	// Edit or a new file (buffer replace)
 	if(strcmp(cmd, "edit") == 0) {
 		if (arg) {
 			free(e->buf->name);
 			e->buf->name = strdup(arg);
 		}
 		return buffer_read(e->buf, arg);
+	}
+
+	// Open a file in a new buffer
+	if(strcmp(cmd, "open") == 0) {
+		if (arg) {
+			new_buffer(e, 0);
+			free(e->buf->name);
+			e->buf->name = strdup(arg);
+			return buffer_read(e->buf, NULL);
+		}
 	}
 	// bad argument
 	return -1;
@@ -58,7 +88,18 @@ int command(editor_t* e, int key) {
 }
 
 int read_file(editor_t* e, int key) {
-	return buffer_read(e->buf, NULL);
+	new_buffer(e, key);
+
+	char input[BUFSIZ] = {};
+	get_input(e, input, NULL);
+	// User didn't put anything in
+	if (strlen(input) == 0) {
+		return -1;
+	} else {
+		// Let read the given file into the buffer	
+		e->buf->name = strdup(input);
+		return buffer_read(e->buf, NULL);
+	}
 }
 
 int write_file(editor_t* e, int key) {
@@ -70,7 +111,7 @@ int write_file(editor_t* e, int key) {
 			return -1;
 		} else {
 			// Set the name
-			e->buf->name = input;
+			e->buf->name = strdup(input);
 		}
 	}
 	return buffer_write(e->buf, NULL);
