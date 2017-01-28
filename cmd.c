@@ -142,7 +142,7 @@ int next_char(editor_t* e, int key) {
 }
 
 int prev_char(editor_t* e, int key) {
-	if(e->buf->col + 1 > 0) {
+	if(e->buf->col > 0) {
 		e->buf->col--;
 		return 1;
 	} else if (e->buf->line->prev) {
